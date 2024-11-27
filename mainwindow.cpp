@@ -8,6 +8,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    Init();
 }
 
 MainWindow::~MainWindow()
@@ -49,4 +51,25 @@ void MainWindow::ChangeResolution(int nWidth, int nHeight)
     } else {
         qDebug() << "Test failed to change display settings: " << result;
     }
+}
+
+void MainWindow::on_btnAdd_clicked()
+{
+    //添加快捷切换按钮
+    if(m_mapBtn.size()==4){
+        return;
+    }
+
+    QString strBtnName = "模式"+QString::number(m_mapBtn.size()+1);
+    QPushButton *pBtn=new QPushButton(strBtnName);
+    pBtn->setFixedSize(200,200);
+    ui->groupBoxMode->layout()->addWidget(pBtn);
+    m_mapBtn.insert(m_mapBtn.size()+1,pBtn);
+
+    qDebug()<<m_mapBtn.size();
+}
+
+void MainWindow::Init()
+{
+    m_mapBtn.insert(1,ui->btnMode1);
 }

@@ -17,16 +17,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_pushButton_clicked()
-{
-    ChangeResolution(2560,1080);
-}
-
-void MainWindow::on_pushButton_2_clicked()
-{
-    ChangeResolution(1920,1080);
-}
-
 void MainWindow::ChangeResolution(int nWidth, int nHeight)
 {
     DEVMODE dm;
@@ -53,23 +43,55 @@ void MainWindow::ChangeResolution(int nWidth, int nHeight)
     }
 }
 
+void MainWindow::AddResolutionBtn(const QString &strName)
+{
+    QString strBtnName = strName;
+    if(strName.isEmpty()||strName == ""){
+        strBtnName = "模式"+QString::number(m_mapBtn.size()+1);
+    }
+    QPushButton *pBtn = new QPushButton(strBtnName);
+    pBtn->setFixedSize(200,200);
+    ui->groupBoxMode->layout()->addWidget(pBtn);
+    m_mapBtn.insert(pBtn,m_mapBtn.size()+1);
+    connect(pBtn,&QPushButton::clicked,this,&MainWindow::SlotBtnClicked);
+    qDebug()<<m_mapBtn.size();
+}
+
 void MainWindow::on_btnAdd_clicked()
 {
     //添加快捷切换按钮
     if(m_mapBtn.size()==4){
         return;
     }
+    AddResolutionBtn("");
+}
 
-    QString strBtnName = "模式"+QString::number(m_mapBtn.size()+1);
-    QPushButton *pBtn=new QPushButton(strBtnName);
-    pBtn->setFixedSize(200,200);
-    ui->groupBoxMode->layout()->addWidget(pBtn);
-    m_mapBtn.insert(m_mapBtn.size()+1,pBtn);
-
-    qDebug()<<m_mapBtn.size();
+void MainWindow::SlotBtnClicked()
+{
+    //判断是哪一个按钮被按下
+    QPushButton *pBtn=qobject_cast<QPushButton*>(sender());
+    if(pBtn == nullptr)
+    {
+        return;
+    }
+    int nConfigNum = m_mapBtn.value(pBtn);
+    qDebug() << nConfigNum;
+    if(nConfigNum > m_listResolution.size())
+        return;
+    auto config = m_listResolution.at(nConfigNum-1);
+    ChangeResolution(config.nWidth,config.nHeight);
 }
 
 void MainWindow::Init()
 {
-    m_mapBtn.insert(1,ui->btnMode1);
+    m_mapBtn.insert(ui->btnMode1,1);
+    connect(ui->btnMode1,&QPushButton::clicked,this,&MainWindow::SlotBtnClicked);
+
+    //AddResolutionBtn("2560 x 1080");
+    AddResolutionBtn("1920 x 1080");
+    AddResolutionBtn("1080 x 720");
+
+    m_listResolution.append(ResolutionConfig{2560,1080});
+    m_listResolution.append(ResolutionConfig{1920,1080});
+    m_listResolution.append(ResolutionConfig{1080,720});
 }

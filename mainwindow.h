@@ -24,15 +24,23 @@ private slots:
 
     void on_btnAdd_clicked();
 
+    void SlotBtnClicked();
+
 private:
     Ui::MainWindow *ui;
 
 private:
     void Init();
     void ChangeResolution(int nWidth,int nHeight);
+    void AddResolutionBtn(const QString& strName);
 
 private:
-    QMap<int,QPushButton*> m_mapBtn;
+    QMap<QPushButton*,int> m_mapBtn;
+    struct ResolutionConfig{
+        int nWidth;
+        int nHeight;
+    };
+    QList<ResolutionConfig> m_listResolution;
 };
 
 #endif // MAINWINDOW_H

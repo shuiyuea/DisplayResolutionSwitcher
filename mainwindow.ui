@@ -14,44 +14,6 @@
    <string>DisplayResolutionSwitcher-分辨率切换器</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="pushButton_2">
-    <property name="geometry">
-     <rect>
-      <x>420</x>
-      <y>290</y>
-      <width>321</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>幼圆</family>
-      <pointsize>24</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>切换 1920*1080</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>290</y>
-      <width>301</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>幼圆</family>
-      <pointsize>24</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>切换 2560*1080</string>
-    </property>
-   </widget>
    <widget class="QGroupBox" name="groupBoxMode">
     <property name="geometry">
      <rect>
@@ -86,7 +48,7 @@
         </size>
        </property>
        <property name="text">
-        <string>模式1</string>
+        <string>2560 x 1080</string>
        </property>
       </widget>
      </item>
@@ -112,7 +74,7 @@
      <x>0</x>
      <y>0</y>
      <width>926</width>
-     <height>23</height>
+     <height>29</height>
     </rect>
    </property>
   </widget>

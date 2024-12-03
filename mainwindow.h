@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include<QPushButton>
 #include <QMap>
+#include "CResolutionEditDlg.h"
 
 namespace Ui {
 class MainWindow;
@@ -37,6 +38,8 @@ private:
         int nHeight;
     };
     QList<ResolutionConfig> m_listResolution;
+
+    CResolutionEditDlg m_EditDlg;
 };
 
 #endif // MAINWINDOW_H

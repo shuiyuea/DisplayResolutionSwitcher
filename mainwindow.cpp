@@ -59,7 +59,10 @@ void MainWindow::AddResolutionBtn(const QString &strName)
 
 void MainWindow::on_btnAdd_clicked()
 {
-    //添加快捷切换按钮
+    m_EditDlg.show();
+    return;
+
+    //添加分辨率切换按钮
     if(m_mapBtn.size()==4){
         return;
     }
